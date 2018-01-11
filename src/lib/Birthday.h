@@ -166,7 +166,9 @@ class Birthday{
 
 public:
 	Birthday();
+	explicit Birthday(const Birthday&);
 	explicit Birthday(::BirthDay::NUM_OF_DAY::Type numOfDay, ::BirthDay::MONTH::Type month, unsigned int years);
+	Birthday& operator=(const Birthday& birthDay);
 	virtual ~Birthday();
 
 	virtual ::BirthDay::DAYS::Type getDay() const;
@@ -205,13 +207,15 @@ public:
 	friend bool operator==(const Birthday& lbrt, const Birthday& rbrt);
 	friend bool operator!=(const Birthday& lbrt, const Birthday& rbrt);
 
-private:
+protected:
+
 	NUM_OF_DAY::Type _numOfDay = NUM_OF_DAY::Type::UNKNOWN;
 	MONTH::Type _month = MONTH::Type::UNKNOWN;
 	unsigned int _years = 0;
 
 	std::tm computedBirthday() const;
 	void checkBirthday();
+	void copyBirthday(const Birthday& prs);
 };
 
 }

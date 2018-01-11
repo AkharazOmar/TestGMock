@@ -40,17 +40,12 @@ TEST_F(TestPersonFixture, OperatorEqual)
 	origin.setCityBirth("Paris");
 	origin.setNationality("France");
 	origin.setSexe(Person::SEXE::MAN);
-	// operEqual = origin;
+	operEqual = origin;
 }
 
 // TEST_F(TestPersonFixture, DISABLED_PersonTestBirthDayMock)
 TEST_F(TestPersonFixture, PersonTestBirthDayMock)
 {
-	// This test is here just for check if mock work.
-	//	std::cerr << "Value from birthDay: " << _birthDay->getDayString() << std::endl;
-	//	std::cerr << "Value from birthDay: " << getBirthDay().getDayString() << std::endl;
-	//	std::cerr << "Person is : " << *this << std::endl;
-	//	std::cerr << "Birthday is : " << _birthDay << std::endl;
 	EXPECT_CALL(*_mockBirthDay, getDayString())
 			.Times(AtLeast(2))
 			.WillOnce(Return("SATURDAY"))

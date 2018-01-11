@@ -43,7 +43,7 @@ void Person::copyPrs(const Person& prs) {
 	_nationality = prs.nationality();
 
 	if (prs._birthDay) {
-		_birthDay = prs._birthDay;
+		_birthDay = new BirthDay::Birthday(*prs._birthDay);
 	}
 	if (prs._father) {
 		_father = new Person(*prs._father);

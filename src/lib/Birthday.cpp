@@ -12,8 +12,28 @@
 
 namespace BirthDay {
 
-Birthday::Birthday() {
+Birthday::Birthday()
+{
 //	setenv("TZ", "/usr/share/zoneinfo/Europe/Paris", 1);
+}
+
+Birthday::Birthday(const Birthday& birthDay)
+{
+	copyBirthday(birthDay);
+}
+
+Birthday& Birthday::operator=(const Birthday& birthDay)
+{
+
+	if (*this != birthDay) {
+		copyBirthday(birthDay);
+	}
+	return *this;
+}
+
+void Birthday::copyBirthday(const Birthday& birthDay)
+{
+	// TODO
 }
 
 unsigned short Birthday::getAge() const

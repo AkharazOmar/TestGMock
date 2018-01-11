@@ -26,7 +26,7 @@ public:
 	Person();
 	virtual ~Person();
 
-	Person(const Person& prs);
+	explicit Person(const Person& prs);
 	Person& operator=(const Person& prs);
 
 	virtual unsigned short getAge() const;
@@ -83,6 +83,7 @@ public:
 	friend bool operator<=(const Person& lprs, const Person& rprs);
 
 protected:
+
 	std::string _firstName = "UNKNOWN",
 	_lastName = "UNKNOWN",
 	_nationality = "UNKNOWN",
