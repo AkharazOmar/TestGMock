@@ -29,6 +29,8 @@ TEST_F(TestPersonFixture, OperatorEqual)
 	EXPECT_FALSE(operEqual == *this);
 	EXPECT_TRUE(operEqual != *this);
 	Person origin;
+	EXPECT_TRUE(operEqual == origin);
+	EXPECT_FALSE(operEqual != origin);
 	origin.setFirstName("MyFirstname");
 	origin.setLastName("MyLastname");
 	origin.setBirthDay(
@@ -41,6 +43,8 @@ TEST_F(TestPersonFixture, OperatorEqual)
 	origin.setNationality("France");
 	origin.setSexe(Person::SEXE::MAN);
 	operEqual = origin;
+	EXPECT_TRUE(operEqual == origin);
+	EXPECT_FALSE(operEqual != origin);
 }
 
 // TEST_F(TestPersonFixture, DISABLED_PersonTestBirthDayMock)

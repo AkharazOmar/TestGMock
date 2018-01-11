@@ -19,6 +19,33 @@ TEST_F(TestBirthday, constructorTest) {
 
 	EXPECT_EQ(ss.str(), "Thursday 1 January 2015");
 	b.setYears(2020);
+	ss.str("");
+	ss.clear();
+	ss << b;
+	EXPECT_EQ(ss.str(), "Wednesday 1 January 2020");
+}
+
+TEST_F(TestBirthday, constructorCopyTest) {
+	BirthDay::Birthday b{
+		BirthDay::NUM_OF_DAY::Type::_1,
+		BirthDay::MONTH::Type::JANUARY,
+		2015
+	};
+
+	BirthDay::Birthday bCopy{b};
+	EXPECT_TRUE(b == bCopy);
+}
+
+TEST_F(TestBirthday, operatorCopyTest) {
+	BirthDay::Birthday b{
+		BirthDay::NUM_OF_DAY::Type::_1,
+		BirthDay::MONTH::Type::JANUARY,
+		2015
+	};
+
+	BirthDay::Birthday bCopy;
+	bCopy = b;
+	EXPECT_TRUE(b == bCopy);
 }
 
 TEST_F(TestBirthday, get_setMonth) {

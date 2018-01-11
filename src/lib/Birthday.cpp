@@ -24,7 +24,6 @@ Birthday::Birthday(const Birthday& birthDay)
 
 Birthday& Birthday::operator=(const Birthday& birthDay)
 {
-
 	if (*this != birthDay) {
 		copyBirthday(birthDay);
 	}
@@ -33,7 +32,9 @@ Birthday& Birthday::operator=(const Birthday& birthDay)
 
 void Birthday::copyBirthday(const Birthday& birthDay)
 {
-	// TODO
+	_numOfDay = birthDay._numOfDay;
+	_month = birthDay._month;
+	_years = birthDay._years;
 }
 
 unsigned short Birthday::getAge() const
