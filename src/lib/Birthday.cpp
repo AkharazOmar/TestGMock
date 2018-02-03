@@ -15,15 +15,18 @@ namespace BirthDay {
 Birthday::Birthday()
 {
 //	setenv("TZ", "/usr/share/zoneinfo/Europe/Paris", 1);
+	setenv("TZ", "", 1);
 }
 
 Birthday::Birthday(const Birthday& birthDay)
 {
+	setenv("TZ", "", 1);
 	copyBirthday(birthDay);
 }
 
 Birthday& Birthday::operator=(const Birthday& birthDay)
 {
+	setenv("TZ", "", 1);
 	if (*this != birthDay) {
 		copyBirthday(birthDay);
 	}
@@ -74,6 +77,7 @@ Birthday::Birthday(NUM_OF_DAY::Type numOfDay, MONTH::Type month, unsigned int ye
 		_numOfDay(numOfDay), _month(month), _years(years)
 {
 //	setenv("TZ", "/usr/share/zoneinfo/Europe/Paris", 1);
+	setenv("TZ", "", 1);
 	checkBirthday();
 }
 
