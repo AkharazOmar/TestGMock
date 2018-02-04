@@ -42,15 +42,13 @@ void Person::copyPrs(const Person& prs) {
 	_sexe = prs.sexe();
 	_nationality = prs.nationality();
 
-	if (prs._birthDay) {
-		_birthDay = new BirthDay::Birthday(*prs._birthDay);
-	}
-	if (prs._father) {
-		_father = new Person(*prs._father);
-	}
-	if (prs._mother) {
-		_mother = new Person(*prs._mother);
-	}
+	_birthDay = (prs._birthDay)? new BirthDay::Birthday(*prs._birthDay): nullptr;
+
+	_father = (prs._father)?
+		 new Person(*prs._father): nullptr;
+
+	_mother = (prs._mother)?
+		 new Person(*prs._mother): nullptr;
 }
 
 Person::Person(const Person& prs)
@@ -125,7 +123,7 @@ std::ostream& operator<<(std::ostream& os, const Person& prs)
 			<< "City birth: " << prs.cityBirth() << std::endl;
 	if (prs._birthDay) {
 		os << "Age: " << prs.getAge() <<std::endl
-			<< "Birthday: " << prs._birthDay << std::endl;
+			<< "Birthday: " << *prs._birthDay << std::endl;
 	} else {
 		os << "Birthday is not defined." << std::endl;
 	}

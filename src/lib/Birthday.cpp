@@ -54,7 +54,6 @@ unsigned short Birthday::getAge() const
 
 	unsigned int diffYears = nowTm.tm_year - birthday.tm_year;
 	return diffYears;
-
 }
 
 void Birthday::checkBirthday() {
