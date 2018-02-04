@@ -13,6 +13,8 @@ TEST_MAIN := main.cpp
 LIBS :=
 LIBS_DEBUG := -lgmock -lpthread -lgtest
 
+STD := c++17
+
 all: Release
 
 .PHONY: all clean
@@ -33,12 +35,12 @@ Debug_DIR:
 
 
 Debug_O: Debug_DIR
-	${GCC} -fPIC ${DEBUG_OPTION} ${SRC_LIB}/* -shared -o ${DEBUG_DIR}/${SRC_LIB}/libPerson.so -MMD -MP -MT"${DEBUG_DIR}/${SRC_LIB}" 
+	${GCC} -fPIC ${DEBUG_OPTION} -std=${STD} ${SRC_LIB}/* -shared -o ${DEBUG_DIR}/${SRC_LIB}/libPerson.so -MMD -MP -MT"${DEBUG_DIR}/${SRC_LIB}"
 
 Debug: Debug_O
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	${GCC} -o ${EXEC_NAME} ${TEST_LIB}/* ${TEST_DIR}/${TEST_MAIN} -I${SRC_LIB} -L${DEBUG_DIR}/${SRC_LIB}/ -lPerson  ${LIBS} ${LIBS_DEBUG} ${DEBUG_OPTION}
+	${GCC} -o ${EXEC_NAME} -std=${STD} ${TEST_LIB}/* ${TEST_DIR}/${TEST_MAIN} -I${SRC_LIB} -L${DEBUG_DIR}/${SRC_LIB}/ -lPerson  ${LIBS} ${LIBS_DEBUG} ${DEBUG_OPTION}
 
 Launch-debug: Debug 
 
