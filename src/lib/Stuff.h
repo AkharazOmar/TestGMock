@@ -4,6 +4,7 @@
  * Author: Omar AKHARAZ
  *
  * Some test C++17
+ *
  */
 #include <iostream>
 #include <boost/type_index.hpp>
@@ -85,4 +86,17 @@ void f_ref_universel(T&& param)
 //		param = 88;
 //		std::cout << "Param: " << param << std::endl;
 //	}
+}
+
+template<typename T>
+void f_value_bis(T param)
+{
+	std::cout << "f_values_bis: T " << type_id_with_cvr<T>().pretty_name() << std::endl;
+	std::cout << "f_ref_universel: param  " << type_id_with_cvr<decltype(param)>().pretty_name() << std::endl;
+	std::cout << "param: " << param << std::endl;
+	std::cout << "param add: " << (void *)param << std::endl;
+	param = "test change valeur";
+	std::cout << "param: " << param << std::endl;
+	std::cout << "param add: " << (void *)param << std::endl;
+	std::cout << "f_ref_universel: param  " << type_id_with_cvr<decltype(param)>().pretty_name() << std::endl;
 }

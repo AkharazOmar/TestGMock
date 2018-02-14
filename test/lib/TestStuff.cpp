@@ -58,10 +58,13 @@ TEST(TestStuff, all)
 	f_pointer_const(&rcx);
 
 	// universel ref
-	// f_ref_universel(2);
+	f_ref_universel(2);
 	f_ref_universel(x);
-	std::cout << "x: " << x << std::endl;
 	f_ref_universel(cx);
 	f_ref_universel(rcx);
 
+	// f_value_bis
+	const char* const cPtr = "Point const char const";
+	f_value_bis(cPtr);
+	std::cout << "cPtr: " << cPtr << std::endl;
 }
