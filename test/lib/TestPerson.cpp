@@ -108,3 +108,73 @@ TEST_F(TestPersonFixture, PersonTestBirthDayMock)
 	EXPECT_EQ(getBirthDay().getDayString(), "MONDAY");
 	EXPECT_EQ(getBirthDay().getDayString(), "MONDAY");
 }
+
+TEST_F(TestPersonFixture, PersonPointer)
+{
+	Person * fPerson = new Person();
+	fPerson->setFirstName("First");
+	fPerson->setLastName("Person");
+
+	Person * sPerson = fPerson;
+
+	sPerson->setFirstName("Second");
+
+	std::cout << "First pointer: " << fPerson << std::endl;
+	std::cout << "Second pointer: " << sPerson << std::endl;
+	std::cout << "First pointer &: " << &fPerson << std::endl;
+	std::cout << "Second pointer &: " << &sPerson << std::endl;
+	std::cout << *fPerson << std::endl;
+
+	std::vector<Person*> persons;
+	std::map<std::string, Person* > mapPersons;
+	persons.push_back(fPerson);
+	mapPersons.insert(std::pair<std::string, Person*>(fPerson->getLastName(), fPerson));
+
+	for (Person * p: persons) {
+		std::cout << "Pointer 1: " << p << std::endl;
+		std::cout << "Address 1: " << &p << std::endl;
+		std::cout << "Value 1: \n" << *p << std::endl;
+	}
+	Person * tPerson = new Person();
+	tPerson->setFirstName("Third");
+	tPerson->setLastName("Person");
+
+	Person * pInVector = persons[0];
+	*pInVector = *tPerson;
+	delete tPerson;
+	for (Person * p: persons) {
+		std::cout << "Pointer 2: " << p << std::endl;
+		std::cout << "Address 2: " << &p << std::endl;
+		std::cout << "Value 2: \n" << *p << std::endl;
+	}
+
+	std::cout << "First pointer: " << fPerson << std::endl;
+	std::cout << "First pointer &: " << &fPerson << std::endl;
+	std::cout << *fPerson << std::endl;
+
+	Person* fourthPerson = new Person();
+	fourthPerson->setFirstName("Fourth");
+	fourthPerson->setLastName("Person");
+
+	for(std::map<std::string, Person*>::const_iterator pIt = mapPersons.cbegin(); pIt != mapPersons.cend(); ++pIt) {
+		std::cout << "key: " << pIt->first << std::endl;
+		std::cout << "Pointer Map1: " << pIt->second << std::endl;
+		std::cout << "Address MAP1: " << &(pIt->second) << std::endl;
+		std::cout << "Value 2: \n" << *(pIt->second) << std::endl;
+	}
+
+	*(mapPersons["Person"]) = *fourthPerson;
+
+	for(std::map<std::string, Person*>::const_iterator pIt = mapPersons.cbegin(); pIt != mapPersons.cend(); ++pIt) {
+		std::cout << "key: " << pIt->first << std::endl;
+		std::cout << "Pointer Map2: " << pIt->second << std::endl;
+		std::cout << "Address MAP2: " << &(pIt->second) << std::endl;
+		std::cout << "Value 2: \n" << *(pIt->second) << std::endl;
+	}
+	for (Person * p: persons) {
+		std::cout << "Pointer 3: " << p << std::endl;
+		std::cout << "Address 3: " << &p << std::endl;
+		std::cout << "Value 3: \n" << *p << std::endl;
+	}
+
+}
