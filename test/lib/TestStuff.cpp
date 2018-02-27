@@ -8,8 +8,15 @@
 #include "../../src/lib/Stuff.h"
 
 #include <gtest/gtest.h>
+#include <vector>
+#include <tuple>
+#include <boost/type_index.hpp>
 
-TEST(TestStuff, all)
+
+using boost::typeindex::type_id_with_cvr;
+
+
+TEST(TestStuff, aTemplate)
 {
 	// rvalue
 	f_value(3);
@@ -67,4 +74,51 @@ TEST(TestStuff, all)
 	const char* const cPtr = "Point const char const";
 	f_value_bis(cPtr);
 	std::cout << "cPtr: " << cPtr << std::endl;
+}
+
+TEST(TestStuff, initialisationUniform)
+{
+	std::vector<int> vAccolade{1,2,3};
+	std::cout << "vAccolade: " << type_id_with_cvr<decltype(vAccolade)>().pretty_name() << std::endl;
+
+	const std::vector<int> vAccoladeConst{4,5,6};
+	std::cout << "vAccoladeConst: " << type_id_with_cvr<decltype(vAccoladeConst)>().pretty_name() << std::endl;
+
+	for(auto i: vAccolade) {
+		std::cout << "vector accolade: " << i << std::endl;
+	}
+	vAccolade.push_back(4);
+	vAccolade[1] = 9;
+	for(auto i: vAccolade) {
+		std::cout << "vector accolade: " << i << std::endl;
+	}
+
+	for(auto i: vAccoladeConst) {
+		std::cout << "vector accolade const: " << i << std::endl;
+	}
+	// Error: vAccoladeConst.push_back(7);
+	// Error: vAccoladeConst[0] = 1;
+	auto tuP = std::make_tuple(1, 2, "Hello world");
+
+	std::cout << "tuP: " << type_id_with_cvr<decltype(tuP)>().pretty_name() << std::endl;
+	std::cout << "1: " << std::get<0>(tuP) << std::endl;
+	std::cout << "2: " << std::get<1>(tuP) << std::endl;
+	std::cout << "3: " << std::get<2>(tuP) << std::endl;
+
+	auto whatIA = {1,2,3};
+	std::cout << "whatIA: " << type_id_with_cvr<decltype(whatIA)>().pretty_name() << std::endl;
+	for(auto i: whatIA) {
+		std::cout << "whatIA: " << i << std::endl;
+	}
+	auto whatIANow = static_cast<std::vector<int>>(std::initializer_list<int>({1,2,3}));
+	std::cout << "whatIANow: " << type_id_with_cvr<decltype(whatIANow)>().pretty_name() << std::endl;
+	for(auto i: whatIANow) {
+		std::cout << "whatIA: " << i << std::endl;
+	}
+
+	std::initializer_list<int> list = {1,2,3};
+	for(auto i: list) {
+		std::cout << "list: " << i << std::endl;
+	}
+
 }
