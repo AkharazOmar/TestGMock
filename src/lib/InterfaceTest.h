@@ -73,6 +73,9 @@ public:
 
 	void clean()
 	{
+		for (typename MyIter<T*>::iterator it=mapOfT.begin(); it!=mapOfT.end(); it++) {
+			delete(it->second);
+		}
 		mapOfT.clear();
 	}
 

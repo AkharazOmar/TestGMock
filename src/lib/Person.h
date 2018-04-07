@@ -42,6 +42,9 @@ public:
 	virtual const std::string& cityBirth() const;
 
 	virtual void setBirthDay(const ::BirthDay::Birthday& birthDay) {
+		if (_birthDay  != nullptr) {
+			delete _birthDay;
+		}
 		_birthDay = new BirthDay::Birthday(birthDay);
 	}
 

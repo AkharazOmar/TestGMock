@@ -176,5 +176,6 @@ TEST_F(TestPersonFixture, PersonPointer)
 		std::cout << "Address 3: " << &p << std::endl;
 		std::cout << "Value 3: \n" << *p << std::endl;
 	}
-
+	delete fPerson;
+	delete fourthPerson;
 }
